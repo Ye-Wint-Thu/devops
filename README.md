@@ -2,4 +2,4 @@
 [![LICENSE](https://img.shields.io/github/license/Ye-Wint-Thu/devops.svg?style=flat-square)](https://github.com/Ye-Wint-Thu/devops/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/release/Ye-Wint-Thu/devops/all.svg?style=flat-square)](https://github.com/Ye-Wint-Thu/devops/releases)
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Ye-Wint-Thu/devops/develop?style=flat-square)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Ye-Wint-Thu/devops/main.yml?branch=develop&style=flat-square)
