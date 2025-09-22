@@ -1,2 +1,1 @@
-Hello!
-This is the program built for Lab 2 of DevOps.
+![workflow](https://github.com/<UserName>/<RepositoryName>/actions/workflows/main.yml/badge.svg)
