@@ -2,5 +2,4 @@
 [![LICENSE](https://img.shields.io/github/license/Ye-Wint-Thu/devops.svg?style=flat-square)](https://github.com/Ye-Wint-Thu/devops/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/release/Ye-Wint-Thu/devops/all.svg?style=flat-square)](https://github.com/Ye-Wint-Thu/devops/releases)
 
-# DevOps
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Ye-Wint-Thu/devops/A%20workflow%20for%20my%20Hello%20World%20App/develop?style=flat-square)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Ye-Wint-Thu/devops/A%20workflow%20for%20my%20Hello%20World%20App/develop?style=flat-square)
