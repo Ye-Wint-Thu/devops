@@ -26,7 +26,7 @@ public class App
             System.out.println("Connecting to database...");
             try
             {
-                Thread.sleep(3000); // Wait a bit for DB to start
+                Thread.sleep(30000);
                 con = DriverManager.getConnection(
                         "jdbc:mysql://db:3306/employees?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
                         "root",
@@ -41,7 +41,7 @@ public class App
             }
             catch (InterruptedException ie)
             {
-                System.out.println("Thread interrupted");
+                System.out.println("Thread interrupted? Should not happen.");
             }
         }
     }
@@ -57,89 +57,20 @@ public class App
             }
             catch (Exception e)
             {
-                System.out.println("Error closing connection");
+                System.out.println("Error closing connection to database");
             }
-        }
-    }
-
-    // Get employee by ID
-    public Employee getEmployee(int ID)
-    {
-        try
-        {
-            Statement stmt = con.createStatement();
-            String query =
-                    "SELECT e.emp_no, e.first_name, e.last_name, t.title, s.salary, d.dept_name, m.first_name AS manager_fname, m.last_name AS manager_lname " +
-                            "FROM employees e " +
-                            "JOIN titles t ON e.emp_no = t.emp_no AND t.to_date = '9999-01-01' " +
-                            "JOIN salaries s ON e.emp_no = s.emp_no AND s.to_date = '9999-01-01' " +
-                            "JOIN dept_emp de ON e.emp_no = de.emp_no AND de.to_date = '9999-01-01' " +
-                            "JOIN departments d ON de.dept_no = d.dept_no " +
-                            "LEFT JOIN dept_manager dm ON d.dept_no = dm.dept_no AND dm.to_date = '9999-01-01' " +
-                            "LEFT JOIN employees m ON dm.emp_no = m.emp_no " +
-                            "WHERE e.emp_no = " + ID;
-
-            ResultSet rset = stmt.executeQuery(query);
-
-            if (rset.next())
-            {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("emp_no");
-                emp.first_name = rset.getString("first_name");
-                emp.last_name = rset.getString("last_name");
-                emp.title = rset.getString("title");
-                emp.salary = rset.getInt("salary");
-                emp.dept_name = rset.getString("dept_name");
-
-                String managerF = rset.getString("manager_fname");
-                String managerL = rset.getString("manager_lname");
-                emp.manager = (managerF != null && managerL != null) ? managerF + " " + managerL : "None";
-
-                return emp;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get employee details");
-            return null;
-        }
-    }
-
-    // Display employee info
-    public void displayEmployee(Employee emp)
-    {
-        if (emp != null)
-        {
-            System.out.println(
-                    emp.emp_no + " " +
-                            emp.first_name + " " +
-                            emp.last_name + "\n" +
-                            emp.title + "\n" +
-                            "Salary: " + emp.salary + "\n" +
-                            emp.dept_name + "\n" +
-                            "Manager: " + emp.manager + "\n");
-        }
-        else
-        {
-            System.out.println("Employee not found");
         }
     }
 
     // Main method
     public static void main(String[] args)
     {
-        App a = new App();
+        App app = new App();   // Create new Application
 
-        a.connect();
+        app.connect();         // Connect to database
 
-        Employee emp = a.getEmployee(255530); // Replace with a valid employee number
-        a.displayEmployee(emp);
+        // Here later you can call app.getEmployee() and app.displayEmployee()
 
-        a.disconnect();
+        app.disconnect();      // Disconnect from database
     }
 }
