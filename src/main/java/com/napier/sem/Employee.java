@@ -21,7 +21,7 @@ public class Employee
     public String last_name;
 
     /**
-     * Employee's job title
+     * Employee's job title (optional for now, not used in Lab 04)
      */
     public String title;
 
@@ -31,12 +31,12 @@ public class Employee
     public int salary;
 
     /**
-     * Employee's current department
+     * Employee's current department (optional for now, not used in Lab 04)
      */
     public String dept_name;
 
     /**
-     * Employee's manager
+     * Employee's manager (optional for now, not used in Lab 04)
      */
     public String manager;
 }

@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -62,6 +63,58 @@ public class App
         }
     }
 
+    // Get all salaries with a limit
+    public ArrayList<Employee> getAllSalaries(int limit)
+    {
+        try
+        {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary " +
+                            "FROM employees, salaries " +
+                            "WHERE employees.emp_no = salaries.emp_no AND salaries.to_date = '9999-01-01' " +
+                            "ORDER BY employees.emp_no ASC " +
+                            "LIMIT " + limit;
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<Employee> employees = new ArrayList<>();
+
+            while (rset.next())
+            {
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("emp_no");
+                emp.first_name = rset.getString("first_name");
+                emp.last_name = rset.getString("last_name");
+                emp.salary = rset.getInt("salary");
+                employees.add(emp);
+            }
+            return employees;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+    // Print a list of employees
+    public void printSalaries(ArrayList<Employee> employees)
+    {
+        if (employees == null)
+        {
+            System.out.println("No employees found");
+            return;
+        }
+
+        System.out.printf("%-10s %-15s %-20s %-10s\n", "Emp No", "First Name", "Last Name", "Salary");
+        for (Employee emp : employees)
+        {
+            System.out.printf("%-10d %-15s %-20s %-10d\n",
+                    emp.emp_no, emp.first_name, emp.last_name, emp.salary);
+        }
+    }
+
     // Main method
     public static void main(String[] args)
     {
@@ -69,7 +122,9 @@ public class App
 
         app.connect();         // Connect to database
 
-        // Here later you can call app.getEmployee() and app.displayEmployee()
+        // Get only 20 employees (change number if needed)
+        ArrayList<Employee> employees = app.getAllSalaries(20);
+        app.printSalaries(employees);
 
         app.disconnect();      // Disconnect from database
     }
